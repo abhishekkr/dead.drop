@@ -2,14 +2,14 @@ require 'sinatra'
 require 'haml'
 
 get '/' do
-  redirect '/upload'
+  redirect '/stash'
 end
 
-get '/upload' do
-  haml :upload
+get '/stash' do
+  haml :stash
 end
 
-post '/upload' do
+post '/stash' do
   localdir = "cut_out__espionage"
   filename = params['dead_body'][:filename]
   tempfile = params['dead_body'][:tempfile]
