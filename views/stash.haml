@@ -1,13 +1,17 @@
 %html
   %head
     %title &#x10E;&#xCB;&#xC3;&#xD0; &#xD0;&#x159;&#xD8;&#x1E57; - Intermediary Stash Keeper
-  %body
+    %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' }
+    %script{ :src => '/js/dropzone.js' }
+    %script{ :src => '/js/svr_dropzone.js' }
+  %body{ :onload => 'mk_dropzone();' }
     %link{ :href => 'http://fonts.googleapis.com/css?family=Rambla:700italic', :rel => 'stylesheet', :type => 'text/css' }
     %link{ :href => '/css/server.css', :rel => 'stylesheet', :type => 'text/css' }
     %h1 &#x10E;&#xCB;&#xC3;&#xD0; &#xD0;&#x159;&#xD8;&#x1E57;
     %h3 Reaper
     %fieldset
       %legend stash your files
+      %div{ :id => 'stashr', :style => 'color:white; background-color:grey; padding:10px;' } Drop files here.
       %form{ :method => 'post', :enctype => 'multipart/form-data' }
         %input{ :type => 'file', :name => 'dead_body' }
         %br
