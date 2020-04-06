@@ -19,4 +19,8 @@ class DeadDrop < Sinatra::Base
     File.write("#{$localdir}/#{filename}", tempfile.read)
     return "#{filename} was successfully uploaded!"
   end
+
+  get '/ping' do
+    return "pong"
+  end
 end

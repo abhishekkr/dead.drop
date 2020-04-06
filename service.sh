@@ -6,22 +6,22 @@ if [[ $1 == 'start' ]]; then
         echo "DEAD DROP is alive and kicking."
     else
         echo "Starting DEAD DROP"
-        thin start --daemon
+        bundle exec thin start --daemon
     fi
 elif [[ $1 == 'stop' ]]; then
     if [[ -f $THIN_PIDFILE ]]; then
         echo "Stopping DEAD DROP"
-        thin stop --daemon
+        bundle exec thin stop --daemon
     else
         echo "DEAD DROP is already dead."
     fi
 elif [[ $1 == 'restart' ]]; then
     if [[ -f $THIN_PIDFILE ]]; then
         echo "Re-Starting DEAD DROP"
-        thin restart --daemon
+        bundle exec thin restart --daemon
     else
         echo "DEAD DROP was dead, starting it."
-        thin start --daemon
+        bundle exec thin start --daemon
     fi
 elif [[ $1 == 'status' ]]; then
     if [[ -f $THIN_PIDFILE ]]; then
