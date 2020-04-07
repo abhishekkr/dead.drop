@@ -1,2 +1,10 @@
+.bundle/**
+temp/**
+tmp/**
+log/**
 *.swp
+*~
+*.tmp
+*.swo
 **/*.swp
+cut_out__espionage/**

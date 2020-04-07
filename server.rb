@@ -13,6 +13,7 @@ class DeadDrop < Sinatra::Base
   end
 
   get '/stash' do
+    @souls = Dir.children($localdir)
     haml :stash
   end
 

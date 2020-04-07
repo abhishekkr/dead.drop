@@ -1,3 +1,4 @@
+```
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
   ______               _  ______
@@ -10,12 +11,21 @@
                                         |_|
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
- v0.0.1                                 Dead.Drop
+ v0.0.2                                 Dead.Drop
 ++++++++++++++++++++++++++++++++++++++++++++++++++
+```
 
- Would be dead drop soon, working at it.
+> Would be dead drop soon, when I get back to working at it.
+>
+> Currently it's just another File uploader.
 
- Currently it's just another File uploader.
+### Try it out
+
+* install dependencies `bundle install --path .bundle`
+
+* starting the service `bundle exec thin start`
+
+* browse `http://localhost:3000/stash`
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++
