@@ -11,7 +11,7 @@
                                         |_|
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
- v0.0.2                                 Dead.Drop
+ v0.0.3                                Dead.Drop
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 ```
 
@@ -21,11 +21,9 @@
 
 ### Try it out
 
-* install dependencies `bundle install --path .bundle`
+* starting the service `go run main.go`
 
-* starting the service `bundle exec thin start`
-
-* browse `http://localhost:3000/stash`
+* browse `http://localhost:3000/upload`
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++
