@@ -5,12 +5,18 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"log"
+	"mime"
 	"net/http"
 	"os"
 	"path"
 
 	"github.com/gol-gol/golfiles"
 )
+
+type Stash struct {
+	Items []string
+}
 
 // Compile templates on start of the application
 var (
@@ -29,14 +35,42 @@ func main() {
 }
 
 func setupRoutes() {
-	http.HandleFunc("/upload", uploadHandler)
-	http.ListenAndServe(*FlagListenAt, nil)
+	cssDir := http.Dir("./public/css")
+	cssFs := http.FileServer(cssDir)
+
+	jsDir := http.Dir("./public/js")
+	jsFs := http.FileServer(jsDir)
+
+	ddropDir := http.Dir(*FlagUploadDir)
+	ddropFs := http.FileServer(ddropDir)
+
+	mime.AddExtensionType(".js", "application/javascript; charset=utf-8")
+	mime.AddExtensionType(".css", "text/css; charset=utf-8")
+
+	mux := http.NewServeMux()
+	mux.Handle("/js/", http.StripPrefix("/js/", jsFs))
+	mux.Handle("/css/", http.StripPrefix("/css/", cssFs))
+	mux.Handle("/ddrop/", http.StripPrefix("/ddrop/", ddropFs))
+	mux.HandleFunc("/upload", uploadHandler)
+	err := http.ListenAndServe(*FlagListenAt, mux)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
+	stash := Stash{Items: []string{}}
+	fullPaths, errStash := golfiles.PathLsN(*FlagUploadDir, 0)
+	if errStash != nil {
+		log.Printf("[ERROR] Failed to list files under %s.\n%v", *FlagUploadDir, errStash)
+	} else {
+		for _, item := range fullPaths {
+			stash.Items = append(stash.Items, path.Base(item))
+		}
+	}
 	switch r.Method {
 	case "GET":
-		display(w, "upload", nil)
+		display(w, "upload", stash)
 	case "POST":
 		uploadFile(w, r)
 	}
